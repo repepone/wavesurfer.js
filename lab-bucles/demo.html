@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bucles A-B</title>
+    <style>
+      body {
+        font:
+          15px/1.4 system-ui,
+          sans-serif;
+        margin: 16px;
+        max-width: 1000px;
+      }
+      fieldset {
+        margin: 12px 0;
+        border: 1px solid #ccc;
+      }
+      button,
+      input,
+      select {
+        font: inherit;
+        margin: 2px;
+      }
+      #lista li {
+        list-style: none;
+      }
+      #compas {
+        font-size: 1.6em;
+        font-variant-numeric: tabular-nums;
+      }
+      .nota {
+        color: #666;
+        font-size: 0.9em;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Bucles A-B (laboratorio)</h1>
+    <p class="nota">
+      Todo ocurre en el navegador: el audio que elijas no sale de tu equipo. Arrastra sobre la onda para crear un bucle.
+    </p>
+    <p>
+      <label>Audio: <input type="file" id="fichero" accept="audio/*" /></label>
+      <span id="estado"></span>
+    </p>
+    <div id="onda"></div>
+    <p>
+      <button id="play">▶︎ / ❚❚</button>
+      <label
+        >Motor:
+        <select id="motor">
+          <option value="regiones">plugin de regiones (region-out → play)</option>
+          <option value="sinhueco">sin hueco (AudioBufferSourceNode.loop)</option>
+        </select>
+      </label>
+      Compás: <span id="compas">–</span>
+    </p>
+
+    <fieldset>
+      <legend>Bucles (marca varios para editarlos a la vez)</legend>
+      <ul id="lista"></ul>
+      <button data-op="izq">← 0,1 s</button>
+      <button data-op="der">0,1 s →</button>
+      <button data-op="ancho">ensanchar 0,05 s</button>
+      <button data-op="estrecho">estrechar 0,05 s</button>
+      <button data-op="rejilla">ajustar a compases</button>
+      <button data-op="borrar">borrar</button>
+    </fieldset>
+
+    <fieldset>
+      <legend>Mapa de compases (para la partitura)</legend>
+      <label>Tempo <input id="bpm" type="number" value="120" min="20" max="300" style="width: 5em" /> ppm</label>
+      <label>Pulsos por compás <input id="pulsos" type="number" value="4" min="1" max="12" style="width: 4em" /></label>
+      <label>Primer compás en <input id="desfase" type="number" value="0" step="0.01" style="width: 5em" /> s</label>
+      <p class="nota">
+        Con tempo fijo es solo una aproximación; en una grabación real el mapa se marca a mano (lista de segundos de
+        cada compás).
+      </p>
+    </fieldset>
+
+    <fieldset>
+      <legend>Cadena</legend>
+      <label>Pasos <input id="cadena" value="A×2, B, C" size="30" /></label>
+      <button id="tocarCadena">tocar cadena</button>
+      <button id="pararCadena">parar</button>
+      <span id="paso"></span>
+    </fieldset>
+
+    <fieldset>
+      <legend>Lista</legend>
+      <button id="exportar">exportar JSON</button>
+      <label>importar JSON <input type="file" id="importar" accept="application/json,.json" /></label>
+    </fieldset>
+
+    <script type="module" src="./demo.js"></script>
+  </body>
+</html>
